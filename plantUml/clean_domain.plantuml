@@ -1,0 +1,112 @@
+@startuml
+'value objects
+frame "Value Objects"{
+
+class OrderId
+
+class CustomerId
+
+class RestaurantId
+
+class StreetId
+
+class Money
+
+class OrderItemId
+
+class TrackingId
+
+enum OrderStatus
+
+}
+
+'domain events
+frame "Domain Events"{
+class OrderCreatedEvent
+
+class OrderPaidEvent
+
+class OrderCancelledEvent
+
+}
+
+
+' aggregate roots
+node "Order Processing Aggregate"{
+class "Order (Aggregate root)"
+
+class OrderItem
+
+class "Product (same)"
+}
+
+node "Restaurant Aggregate"{
+
+class "Restaurant (Aggregate root)"
+
+class Product
+
+}
+
+
+node "Customer Aggregate"{
+class "Customer (Aggregate root)"
+
+
+}
+
+
+
+' classes with field variables and methods
+
+class "Restaurant (Aggregate root)"{
+
+RestaurantId restaurantId;
+List<Product> products;
+Boolean active;
+
+}
+class Product{
+
+String name;
+Money price;
+
+}
+
+
+class "Order (Aggregate root)"{
+OrderId orderId;
+CustomerId customerId;
+RestaurantId restaurantId;
+StreetAddress deliveryAddress;
+Money price;
+List<OrderItem> items;
+TrackingId trackingId;
+OrderStatus orderStatus;
+List<String> failureMessages;
+
+public void validateOrder()
+initializeOrder()
+pay()
+approve()
+initCancel()
+cancel()
+}
+
+class OrderItem{
+
+OrderItemId orderItemId;
+OrderId orderId;
+Product product;
+Integer quantity;
+Money price;
+Money subTotal;
+
+}
+
+class "Customer (Aggregate root)"{
+CustomerId customerId;
+}
+@enduml
+
+

@@ -1,0 +1,88 @@
+@startuml
+
+
+package common{
+
+    package common-dataaccess../entity {
+        class RestaurantEntity{
+            @Id
+            private UUID restaurantId;
+            @Id
+            private UUID productId;
+            private String restaurantName;
+            private Boolean restaurantActive;
+            private String productName;
+            private BigDecimal productPrice;
+            private Boolean productAvailable;
+
+            public boolean equals(Object o)
+            public int hashCode()
+
+        }
+        class RestaurantEntitId{
+            private UUID restaurantId;
+            private UUID productId;
+
+            public boolean equals(Object o)
+            public int hashCode()
+        }
+    }
+
+    package common-domain{
+
+
+        package common-domain/../entity{
+            abstract class BaseEntity<ID>{
+                private ID id;
+
+                public ID getId()
+                public void setId(ID id)
+
+                public boolean equals(Object o)
+                public int hashCode()
+
+            }
+           abstract class AggregateRoot<ID> extends BaseEntity
+        }
+
+        package common-domain/..valueobject{
+            abstract class BaseId<T>
+            class CustomerId extends BaseId
+            class Money
+            enum OrderApprovalStatus
+            class OrderId extends BaseId
+            enum OrderStatus
+            enum PaymentOrderStatus
+            enum PaymentStatus
+            class ProductId extends BaseId
+            class RestaurantId extends BaseId
+            enum RestaurantOrderStatus
+
+        }
+
+    }
+
+}
+
+
+
+
+package order-service{
+    package order-domain-core{
+        package order-service/--/entity{
+            class Customer<CustomerId> extends AggregateRoot
+            class Order<OrderId>  extends AggregateRoot
+            class OrderItem<OrderItemId> extends BaseEntity
+            class Product<ProductId> extends BaseEntity
+            class Restaurant<RestaurantId> extends AggregateRoot
+            
+        }
+        package order-service/--/valueobject{
+            class OrderItemId<Long>  extends BaseId
+            class StreetAddress
+            class TrackingId<UUID> extends BaseId
+        }
+    }
+}
+
+@enduml

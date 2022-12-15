@@ -1,0 +1,62 @@
+@startuml
+
+package core {
+
+    package "common_domain/dizi_ayraci"{
+        class aggregate_root
+        class base_entity
+    }
+
+    package error {
+        class exceptions
+        class failure
+        class success
+    }
+}
+
+package "feature/user/domain/entity" {
+    class "MyUser (aggregate root)" as MyUser{
+        List<UserRoles> roles;
+    }
+    enum UserRoles{
+        COMMONUSER
+        DELIVER
+        MANAGER
+    }
+}
+
+package core/common_domain{
+    package common-domain/../entity{
+        abstract class BaseEntity<DocumentID>{
+            private DocumentID id;
+
+            public DocumentID getId()
+            public void setId(DocumentID id)
+
+            public boolean equals(Object o)
+            public int hashCode()
+
+        }
+        abstract class AggregateRoot<DocumentID> extends BaseEntity
+    }
+    package common-domain/..valueobject{
+        abstract class BaseId<T>
+        class CustomerId extends BaseId
+        class Money
+        enum OrderApprovalStatus
+        class OrderId extends BaseId
+        enum OrderStatus
+        enum PaymentOrderStatus
+        enum PaymentStatus
+        class ProductId extends BaseId
+        class RestaurantId extends BaseId
+        enum RestaurantOrderStatus
+
+    }
+
+}
+
+
+'MyUser *- UserRoles
+
+@enduml
