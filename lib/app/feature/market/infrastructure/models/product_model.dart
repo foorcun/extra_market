@@ -5,9 +5,11 @@ import 'package:extra_market/app/feature/market/domain/entity/product.dart';
 import 'package:extra_market/app/feature/market/domain/value_object/product_id.dart';
 
 class ProductModel extends Product {
-  String? productId;
-  ProductModel({String? productName, ProductId? productId})
-      : super(productName: productName, productId: productId);
+  ProductModel({
+    super.productName,
+    super.photoUrl,
+    required super.documentId, // documentId == ProductId
+  }) : super();
 
   setPhotoUrl(String photoUrl) {
     super.photoUrl = photoUrl;
@@ -18,6 +20,7 @@ class ProductModel extends Product {
   }) {
     return ProductModel(
       productName: productName ?? this.productName,
+      documentId: documentId,
     );
   }
 
@@ -30,6 +33,7 @@ class ProductModel extends Product {
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     return ProductModel(
       productName: map['productName'],
+      documentId: map["documentId"],
     );
   }
 
@@ -51,8 +55,14 @@ class ProductModel extends Product {
   @override
   int get hashCode => productName.hashCode;
 
-  ProductModel.newFromSnapshot(
+  factory ProductModel.newFromSnapshot(
       QueryDocumentSnapshot<Map<String, dynamic>> doc) {
+    return ProductModel(
+        documentId: ProductId.create(doc.id).fold((l) => null, (r) => r),
+        productName:
+            doc.data().containsKey("productName") ? doc["productName"] : null,
+        photoUrl: doc.data().containsKey("photoUrl") ? doc["photoUrl"] : null);
+
     // if (doc.data().containsKey("id") == true) {
     //   id = doc['id'];
     // } else {
@@ -68,21 +78,24 @@ class ProductModel extends Product {
     // }
 
     // print("doc datalari " + doc.toString());
-    doc.data().containsKey("productName")
-        ? productName = doc["productName"]
-        : productName = null;
 
-    doc.data().containsKey("photoUrl")
-        ? photoUrl = doc["photoUrl"]
-        : photoUrl = null;
+    // doc.data().containsKey("productName")
+    //     ? productName = doc["productName"]
+    //     : productName = null;
 
-    doc.data().containsKey("price") ? price = doc["price"] : price = null;
-    doc.data().containsKey("para_birimi")
-        ? para_birimi = doc["para_birimi"]
-        : para_birimi = null;
+    // doc.data().containsKey("photoUrl")
+    //     ? photoUrl = doc["photoUrl"]
+    //     : photoUrl = null;
 
-    // this.setDocumentID(doc.id);
-    // super.documentID(doc.id);
-    productId = doc.id;
+    // doc.data().containsKey("price") ? price = doc["price"] : price = null;
+    // doc.data().containsKey("para_birimi")
+    //     ? para_birimi = doc["para_birimi"]
+    //     : para_birimi = null;
+
+    // // this.setDocumentID(doc.id);
+    // //  documentID(doc.id);
+    // documentId = ProductId.create(doc.id).fold((l) => null, (r) => r);
+
+    // return this(documentId: documentId);
   }
 }

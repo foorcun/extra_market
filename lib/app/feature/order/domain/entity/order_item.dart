@@ -17,7 +17,7 @@ class OrderItem extends BaseEntity<OrderItemId> {
     this.price,
     this.subTotal,
     OrderItemId? orderItemId,
-  }) : super(documentID: orderItemId);
+  }) : super(documentId: orderItemId);
 
   @override
   // TODO: implement props
