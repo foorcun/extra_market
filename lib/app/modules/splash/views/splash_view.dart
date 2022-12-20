@@ -14,7 +14,7 @@ class SplashView extends GetView<SplashController> {
       ),
       body: Center(
         child: Text(
-          'SplashView is working',
+          'Buraya Logo gelecek',
           style: TextStyle(fontSize: 20),
         ),
       ),

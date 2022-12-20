@@ -1,11 +1,11 @@
+import 'package:extra_market/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/login_controller.dart';
+import '../controllers/temp_home_controller.dart';
 
-class LoginView extends GetView<LoginController> {
+class TempHomeView extends GetView<TempHomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,7 +137,7 @@ class SearchTextField extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  final LoginController controller;
+  final TempHomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -158,7 +158,7 @@ class SearchTextField extends StatelessWidget {
 }
 
 class CustomSearchDelegate extends SearchDelegate {
-  LoginController controller;
+  TempHomeController controller;
   CustomSearchDelegate({required this.controller});
 
   @override
@@ -214,7 +214,7 @@ class SliverListView extends StatelessWidget {
     required this.controller,
   }) : super(key: key);
 
-  final LoginController controller;
+  final TempHomeController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -230,13 +230,18 @@ class SliverListView extends StatelessWidget {
           itemBuilder: ((context, index) {
             return Card(
               child: ListTile(
+                onTap: () {
+                  Get.toNamed(Routes.ORDER_ITEM,
+                      arguments: controller
+                          .filteredProductList[index]); // argument Product
+                },
                 leading: Container(
                   height: 80,
                   width: 80,
                   child: controller.filteredProductList[index].photoUrl != null
-                      ? Image.network(
-                          controller.filteredProductList[index].photoUrl!)
-                      // ? Placeholder()
+                      // ? Image.network(
+                      // controller.filteredProductList[index].photoUrl!)
+                      ? Placeholder()
                       : Container(),
                 ),
                 // title: Text(controller.productList[index].productName!),

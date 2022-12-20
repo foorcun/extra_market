@@ -16,7 +16,8 @@ class SplashController extends GetxController {
     super.onReady();
 
     Get.find<GoogleSignInService>()
-        .yonlendirme(homePath: Routes.HOME, loginPath: Routes.LOGIN);
+        // .yonlendirme(homePath: Routes.HOME, loginPath: Routes.LOGIN);
+        .yonlendirme(homePath: Routes.HOME, loginPath: Routes.TEMP_HOME);
   }
 
   @override

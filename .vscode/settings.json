@@ -1,0 +1,29 @@
+{
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "files.exclude": {
+    "linux": true,
+    "macos": true,
+    "web": true,
+    "test": true,
+    "windows": true,
+    ".flutter-plugins": true,
+    ".flutter-plugins-dependencies": true,
+    ".gitignore": true,
+    ".metadata": true,
+    "analysis_options.yaml": true,
+    "extra_market.iml": true,
+    "pubspec.lock": true,
+    "README.md": true,
+    "pubspec.yaml": true,
+    "lib\\app\\modules\\login": true,
+    "lib\\app\\modules\\home": true,
+    "lib\\app\\modules\\splash": true,
+    ".dart_tool": true,
+    ".idea": true,
+    ".vscode": true,
+    "android": true,
+    "assets": true,
+    "build": true,
+    "ios": true
+  }
+}

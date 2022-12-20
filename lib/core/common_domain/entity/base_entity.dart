@@ -1,9 +1,11 @@
 import 'package:equatable/equatable.dart';
 
-abstract class BaseEntity<DocumentID> extends Equatable {
-  DocumentID? _documentID;
+abstract class BaseEntity<T> extends Equatable {
+  T? documentId;
 
-  DocumentID? get getDocumentID => _documentID;
+  BaseEntity({T? documentID});
 
-  set setDocumentID(DocumentID? documentID) => _documentID = documentID;
+  T? get getDocumentID => documentId;
+
+  set setDocumentID(T? documentID) => documentID = documentID;
 }

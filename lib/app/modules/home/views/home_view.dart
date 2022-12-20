@@ -17,13 +17,19 @@ class HomeView extends GetView<HomeController> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Image.asset(
+                'assets/images/extra_market.png',
+                height: MediaQuery.of(context).size.width / 2,
+                fit: BoxFit.fill,
+              ),
+            ),
             // Text(controller.getPhotoUrl().toString()),
-            controller.getPhotoUrl() != null
-                ? CircleAvatar(
-                    radius: 40,
-                    backgroundImage: NetworkImage(controller.getPhotoUrl()!),
-                  )
-                : CircularProgressIndicator(),
+            CircleAvatar(
+              radius: 40,
+              backgroundImage: NetworkImage(controller.getPhotoUrl()!),
+            ),
             Text(
               // controller.name == null ? "bu null true" : "bu null false",
               // Get.find<GoogleSignInService>().myUser.value?.displayName ??

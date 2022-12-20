@@ -1,3 +1,7 @@
+import 'package:extra_market/app/feature/market/domain/repositories/i_product_repository.dart';
+import 'package:extra_market/app/feature/market/infrastructure/datasources/firebase_data_source_product.dart';
+import 'package:extra_market/app/feature/market/infrastructure/datasources/i_data_source_product.dart';
+import 'package:extra_market/app/feature/market/infrastructure/repositories/product_repository.dart';
 import 'package:extra_market/app/getx_service/google_sign_in_service.dart';
 import 'package:flutter/material.dart';
 
@@ -31,4 +35,7 @@ Future<void> initServices() async {
   await Get.putAsync<GoogleSignInService>(
       () async => await GoogleSignInService());
   print("All services started...");
+
+  Get.lazyPut<IDataSourceProduct>(() => FirebaseDataSourceProduct());
+  Get.lazyPut<IProductRepository>(() => ProductRepository());
 }
